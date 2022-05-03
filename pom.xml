@@ -14,7 +14,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<sonar.projectKey>Grade-app-api-API</sonar.projectKey>
+		<sonar.projectKey>Grade-app-api</sonar.projectKey>
 		<sonar.organization>kv-b1-2022</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
