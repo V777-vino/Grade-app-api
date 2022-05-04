@@ -12,6 +12,8 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 	
 	
 List<Mark>  findByRollNum(Integer rolNum);
+
+//Mark findByRollNUmAndTerm(Integer rollNum,Integer term);
 	
 
 }

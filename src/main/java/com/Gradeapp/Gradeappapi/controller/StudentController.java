@@ -15,20 +15,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.Gradeapp.Gradeappapi.dao.StudentRepository;
+
+import com.Gradeapp.Gradeappapi.dao.StudentRepositorys;
 import com.Gradeapp.Gradeappapi.model.Student;
+import com.Gradeapp.Gradeappapi.service.StudentService;
 
 @RestController
 public class StudentController {
 
 	@Autowired
-	StudentRepository studentRepository;
+	StudentRepositorys studentRepository;
+
+	@Autowired
+	StudentService studentService;
 
 	@PostMapping("students/registerStudent")
-	public void register(@RequestBody Student student) {
-
-		studentRepository.save(student);
-
+	public Object register(@RequestBody Student student) {
+		return studentService.register(student);
 	}
 
 	@GetMapping("students/listStudents")
@@ -54,18 +57,18 @@ public class StudentController {
 	@PatchMapping("students/{rollNum}")
 	public void updatePartially(@PathVariable("rollNum") Integer rollNum, @RequestBody Student student) {
 		student.setRollNum(rollNum);
-		Student studentobj = studentRepository.findById(rollNum).get();
+		Student studentobj = (Student) studentRepository.findById(rollNum).get(); // studentRepository.findById(rollNum).get();
 		studentobj.setName(student.getName());
 		studentRepository.save(studentobj);
 
 	}
 
-	@PostMapping("students/login")
-	public Student login(@RequestBody Student student) {
-		Optional<Student> studentObj = studentRepository.findByMailIdAndDob(student.getMailId(), student.getDob());
-		return studentObj.get();
-
-	}
+//	@PostMapping("students/login")
+//	public Student login(@RequestBody Student student) {
+//		Optional<Student> studentObj = studentRepository.findByMailIdAndDob(student.getMailId(), student.getDob());
+//		return studentObj.get();
+//
+//	}
 
 	@SuppressWarnings("unchecked")
 	@GetMapping("students/findByName")
@@ -86,4 +89,15 @@ public class StudentController {
 		}
 
 	}
+
+	@SuppressWarnings("unchecked")
+	@PostMapping("student/login")
+	public List<Object> returnAll(@RequestBody Student student) throws Exception {
+//		Validator.loginValidator(student);
+		List<Object> list = studentRepository.login(student.getMailId(), student.getDob());
+		return list;
+//		return  null;
+
+	}
+
 }
