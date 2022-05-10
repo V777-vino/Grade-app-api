@@ -16,23 +16,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Gradeapp.Gradeappapi.dao.StudentRepositorys;
+import com.Gradeapp.Gradeappapi.dao.StudentRepository;
+import com.Gradeapp.Gradeappapi.message.Message;
 import com.Gradeapp.Gradeappapi.model.Student;
 import com.Gradeapp.Gradeappapi.service.StudentService;
 
 @RestController
 public class StudentController {
 
+
 	@Autowired
-	StudentRepositorys studentRepository;
+	StudentRepository studentRepository;
 
 	@Autowired
 	StudentService studentService;
 
-	@PostMapping("students/registerStudent")
-	public Object register(@RequestBody Student student) {
-		return studentService.register(student);
+	@PostMapping("students/reigster")
+	public Object register(@RequestBody Student student) throws Exception {
+		Message message = new Message();
+		try {
+			Object result = studentService.validatingRegistration(student);
+			
+		System.out.println(student);
+		
+		return result;
+		
+		}catch(Exception e) {
+			message.setMessage(e.getMessage());
+			return message;
+		}
+		
+		
 	}
+
+//	@PostMapping("students/registerStudent")
+//	public Student register(@RequestBody Student student) {
+//		Student stuObj = studentRepository.save(student);
+//		return stuObj;
+//	}
 
 	@GetMapping("students/listStudents")
 	public List<Student> findAll() {
@@ -90,7 +111,6 @@ public class StudentController {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@PostMapping("student/login")
 	public List<Object> returnAll(@RequestBody Student student) throws Exception {
 //		Validator.loginValidator(student);

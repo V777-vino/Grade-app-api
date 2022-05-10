@@ -1,18 +1,10 @@
 package com.Gradeapp.Gradeappapi.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,8 +34,16 @@ public class Student {
 	@Column(name = "gender")
 	private String gender;
 
-//	@OneToMany(targetEntity = Mark.class, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "sm_fk", referencedColumnName = "roll_num")
-//	private List<Mark> Marks;
+	@Column(name = "contact_no")
+	private long contactNo;
+
+	@Column(name = "fathers_name")
+	private String fathersName;
+
+	@Column(name = "mothers_name")
+	private String mothersName;
+
+	@Column(name = "address")
+	private String address;
 
 }
