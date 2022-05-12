@@ -5,28 +5,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.PatchMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Gradeapp.Gradeappapi.dao.MarkRepository;
+import com.Gradeapp.Gradeappapi.message.Message;
 import com.Gradeapp.Gradeappapi.model.Mark;
 //import com.Gradeapp.Gradeappapi.model.Student;
+import com.Gradeapp.Gradeappapi.service.MarkService;
 
 @RestController
 public class MarkController {
 	@Autowired
 	MarkRepository markRepository;
 
+	@Autowired
+	MarkService markService;
+
 	@GetMapping("mark/addmarks")
-	public void addMarks(@RequestParam("rollNum") Integer rollNum, @RequestParam("term") Integer term,
+	public String addMarks(@RequestParam("rollNum") Integer rollNum, @RequestParam("term") Integer term,
 			@RequestParam("subName") String subName, @RequestParam("subId") Integer subId,
 			@RequestParam("marks") Integer marks) {
+		Message message = new Message();
 		Mark mark = new Mark(rollNum, term, subName, subId, marks);
-		markRepository.save(mark);
-
+		try {
+			System.out.println("iufhfiweuhfu");
+			markService.markValidate(mark);
+			System.out.println("iufhfiweuhfu");
+		} catch (Exception e) {
+			message.setMessage(e.getMessage());
+		}
+		return "marks updated";
 	}
 
 	@GetMapping("mark/listAllMarks")

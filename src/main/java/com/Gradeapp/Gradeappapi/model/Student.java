@@ -35,7 +35,7 @@ public class Student {
 	private String gender;
 
 	@Column(name = "contact_no")
-	private long contactNo;
+	private String contactNo;
 
 	@Column(name = "fathers_name")
 	private String fathersName;

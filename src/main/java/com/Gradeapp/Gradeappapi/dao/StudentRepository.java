@@ -11,9 +11,7 @@ import com.Gradeapp.Gradeappapi.model.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-	@SuppressWarnings("rawtypes")
-
-	public List findByName(String name);
+	public Optional<Student> findByName(String name);
 
 	void deleteById(Integer rollNum);
 
@@ -23,4 +21,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 	@Query(value = "SELECT student_school.roll_num, student_school.name, mark_school.term, mark_school.sub_name, mark_school.sub_id, mark_school.marks FROM student_school INNER JOIN mark_school ON student_school.roll_num = mark_school.roll_num;", nativeQuery = true)
 	public List<Object> login(String mailId, String dob);
+
+	public Student findByMailId(String mailId);
+
+	public Student findByContactNo(String contactNo);
 }
