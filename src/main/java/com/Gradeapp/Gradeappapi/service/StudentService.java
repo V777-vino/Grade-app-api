@@ -21,15 +21,13 @@ public class StudentService {
 
 	public Student validatingRegistration(Student student) throws Exception {
 
-		Student stu = new Student();
 		try {
 			validator.studentFieldValidator(student);
-
-			stu = studentRepository.save(student);
+			studentRepository.save(student);
 		} catch (ValidatorException e) {
 			throw new ValidatorException(e.getMessage());
 		}
-		return stu;
+		return student;
 
 	}
 
@@ -73,11 +71,13 @@ public class StudentService {
 	}
 
 	public Student findByName(String name) {
-		try{validator.nameValidator(name);
-		Optional<Student>student=studentRepository.findByName(name);
-		if(student.isPresent()) {
-			return student.get();
-		}}catch(Exception e) {
+		try {
+			validator.nameValidator(name);
+			Optional<Student> student = studentRepository.findByName(name);
+			if (student.isPresent()) {
+				return student.get();
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

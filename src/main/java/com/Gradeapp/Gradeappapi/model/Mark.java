@@ -5,14 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity(name = "mark_school")
 public class Mark {
@@ -20,24 +18,24 @@ public class Mark {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "entry_num", insertable = false, updatable = false)
-	private Integer entryNum;
+	private int entryNum;
 
-	@Column(name = "roll_num", nullable = false)
-	private Integer rollNum;
+	@Column(name = "roll_num")
+	private int rollNum;
 
-	@Column(name = "term", nullable = false)
-	private Integer term;
+	@Column(name = "term")
+	private int term;
 
-	@Column(name = "sub_name", nullable = false)
+	@Column(name = "sub_name")
 	private String subName;
 
-	@Column(name = "sub_id", nullable = false)
-	private Integer subId;
+	@Column(name = "sub_id")
+	private int subId;
 
-	@Column(name = "marks", nullable = false)
-	private Integer marks;
+	@Column(name = "marks")
+	private int marks;
 
-	public Mark(Integer rollNum, Integer term, String subName, Integer subId, Integer marks) {
+	public Mark(int rollNum, Integer term, String subName, Integer subId, Integer marks) {
 		super();
 		this.rollNum = rollNum;
 		this.term = term;

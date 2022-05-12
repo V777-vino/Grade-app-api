@@ -10,39 +10,27 @@ import com.Gradeapp.Gradeappapi.model.Mark;
 public class MarkValidator {
 
 	public static void markValidate(Mark mark) throws Exception {
-		Mark m = new Mark();
-		Integer rollNum = m.getRollNum();
-		String subName = m.getSubName();
-		Integer term = m.getTerm();
-		Integer subId = m.getSubId();
-		Integer marks = m.getMarks();
+		int rollNum = mark.getRollNum();
+		String subName = mark.getSubName();
+		int term = mark.getTerm();
+		int subId = mark.getSubId();
+		int marks = mark.getMarks();
 
-		if (rollNum != 0) {
-
-		} else {
-			throw new Exception("valid new roll number");
-		}
-		if (subName != null) {
-
-		} else {
+		if (rollNum == 0) {
+			throw new Exception("enter a valid roll number");
+		} 
+		if (subName.isBlank()) {
 			throw new Exception("name should not be null");
-		}
-		if (term != 0) {
-
-		} else {
+		} 
+		if (term == 0) {
 			throw new Exception("term shoud not be zero");
-		}
-		if (subId != 0) {
-
-		} else {
+		} 
+		if (subId == 0) {
 			throw new Exception("subject id shoud not be zero");
-		}
-		if (marks != 0) {
-
-		} else {
+		} 
+		if (marks == 0) {
 			throw new Exception("marks shoud not be zero");
 		}
-
 	}
 
 }

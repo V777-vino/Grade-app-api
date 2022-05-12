@@ -28,10 +28,6 @@ public class StudentController {
 	@Autowired
 	StudentService studentService;
 
-	
-	
-	
-
 //	@PostMapping("student/login")
 //	public List<Object> returnAll(@RequestBody Student student) throws Exception {
 ////		Validator.loginValidator(student);
@@ -41,7 +37,7 @@ public class StudentController {
 ////		return  null;
 //
 //	}
-  
+
 //	 public Object login(@RequestBody User user) {
 //		 
 //	 }

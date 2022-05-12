@@ -26,17 +26,18 @@ public class MarkController {
 	MarkService markService;
 
 	@GetMapping("mark/addmarks")
-	public String addMarks(@RequestParam("rollNum") Integer rollNum, @RequestParam("term") Integer term,
-			@RequestParam("subName") String subName, @RequestParam("subId") Integer subId,
-			@RequestParam("marks") Integer marks) {
+	public String addMarks(@RequestParam("rollNum") int rollNum, @RequestParam("term") int term,
+			@RequestParam("subName") String subName, @RequestParam("subId") int subId,
+			@RequestParam("marks") int marks) {
 		Message message = new Message();
 		Mark mark = new Mark(rollNum, term, subName, subId, marks);
+		System.out.println(mark);
 		try {
-			System.out.println("iufhfiweuhfu");
 			markService.markValidate(mark);
-			System.out.println("iufhfiweuhfu");
 		} catch (Exception e) {
 			message.setMessage(e.getMessage());
+			e.printStackTrace();	
+			return message.getMessage();
 		}
 		return "marks updated";
 	}
